@@ -1,3 +1,0 @@
-var Tag = React.createClass({
-  
-})

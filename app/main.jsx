@@ -1,9 +1,10 @@
+
 var Main = React.createClass({
 
   render: function() {
+    console.log(user1)
     return (
       <div className="rewards">
-        <Tags />
         <p> Here are all the rewards </p>
         <div className="content">
         </div>
