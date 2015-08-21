@@ -1,11 +1,22 @@
-
 var Main = React.createClass({
+  getInitialState: function() {
+    return {data: []}
+  },
+
+  loadRewards: function(){
+
+  },
+
+  componentDidMount: function(){
+    console.log('hello');
+    this.loadRewards();
+  },
 
   render: function() {
     console.log(user1)
     return (
-      <div className="rewards">
-        <p> Here are all the rewards </p>
+      <div className="main">
+        <RewardList data={this.state.data} />
         <div className="content">
         </div>
       </div>
