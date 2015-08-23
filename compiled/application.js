@@ -144,13 +144,57 @@ var rewards = [
   }
 ];
 
+var Reward = React.createClass({displayName: "Reward",
+  render: function() {
+    return (
+      React.createElement("div", {className: "reward"}, 
+        React.createElement("ul", {className: "rewardDescript"}, 
+          React.createElement("li", null, this.props.user), 
+          React.createElement("li", null, this.props.experience), 
+          React.createElement("li", null, this.props.status), 
+          React.createElement("li", null, this.props.date)
+        )
+      )
+    )
+  }
+})
+
+var RewardList = React.createClass({displayName: "RewardList",
+  render: function() {
+    console.log('hi');
+    var rewardItem = this.props.data.map(function(reward){
+      return (
+        React.createElement(Reward, {
+          user: reward.user, 
+          experience: reward.experience, 
+          date: reward.date, 
+          status: reward.status
+          }
+        )
+      )
+    })
+    console.log('hellos');
+    return (
+      React.createElement("div", {className: "rewardList"}, 
+        rewardItem
+      )
+    )
+  }
+})
+
+// var Tag = React.createClass({
+//jgajgkl;jakl;jdsafaafasfds
+// })
+
 var Main = React.createClass({displayName: "Main",
   getInitialState: function() {
     return {data: []}
   },
 
   loadRewards: function(){
-
+    this.setState({
+      data: rewards
+    })
   },
 
   componentDidMount: function(){
@@ -172,49 +216,3 @@ var Main = React.createClass({displayName: "Main",
 })
 
 React.render(React.createElement(Main, null), document.getElementById('main'))
-
-var Reward = React.createClass({displayName: "Reward",
-  render: function() {
-    return (
-      React.createElement("div", {className: "reward"}, 
-        React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("li", {className: "descript"}, this.props.user), 
-          React.createElement("li", {className: "descript"}, this.props.experience), 
-          React.createElement("li", {className: "descript"}, this.props.status), 
-          React.createElement("li", {className: "descript"}, this.props.date)
-        )
-      )
-    )
-  }
-})
-
-var RewardList = React.createClass({displayName: "RewardList",
-  render: function() {
-    console.log('hi');
-    var rewardItem = this.props.data.map(function(reward){
-      return (
-        // React.createElement(Reward, {
-        //   user: reward.user,
-        //   experience: reward.experience,
-        //   date: reward.date,
-        //   status: reward.status
-        // })
-        React.createElement(Reward, {
-          user: reward.user, 
-          experience: reward.experience, 
-          date: reward.date, 
-          status: reward.status
-          }
-        )
-      )
-    })
-
-    return (
-      React.createElement("div")
-    )
-  }
-})
-
-// var Tag = React.createClass({
-//
-// })

@@ -4,7 +4,9 @@ var Main = React.createClass({
   },
 
   loadRewards: function(){
-
+    this.setState({
+      data: rewards
+    })
   },
 
   componentDidMount: function(){
