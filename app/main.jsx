@@ -12,19 +12,28 @@ var Main = React.createClass({
     })
   },
 
+  handleTagClick: function(data) {
+    var rewards = data.rewards;
+    console.log('work???');
+    this.setState({
+      rewards: rewards
+    });
+  },
+
   componentDidMount: function(){
     console.log('hello');
     this.loadRewards();
   },
 
   render: function() {
+    // user1.name = "Juno"
     console.log(user1)
     return (
       <div className="main">
         <div className="banner">
           <p>See rewards happening now.</p>
         </div>
-        <TagList tags={this.state.tags} />
+        <TagList tags={this.state.tags} onTagClick={this.handleTagClick} />
         <RewardList rewards={this.state.rewards} />
         <div className="content">
         </div>

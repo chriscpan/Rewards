@@ -71,6 +71,7 @@ ul {
 
 .tag:hover{
   border-bottom: 5px solid rgb(85, 172, 238);
+  cursor: pointer;
 }
 
 .rewardList {
@@ -98,4 +99,8 @@ ul {
 .stat-right {
   width: 40%;
   float: right;
+}
+
+.active {
+  border-bottom: 5px solid rgb(85, 172, 238);
 }

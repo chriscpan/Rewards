@@ -198,10 +198,50 @@ var RewardList = React.createClass({displayName: "RewardList",
 // })
 
 var TagList = React.createClass({displayName: "TagList",
+  getInitialState: function() {
+    return {
+      filterOn: false
+    }
+  },
+
+  handleClick: function(e) {
+    var target = $(e.currentTarget);
+    $('.active').removeClass('active');
+    target.addClass('active');
+    var text = target.text();
+    var filteredArr = [];
+    rewards.forEach(function(reward){
+      if (text === 'all') {
+        filteredArr = rewards;
+        return;
+      }
+      if (reward.status === text) {
+        filteredArr.push(reward)
+      }
+    })
+    this.props.onTagClick({
+      rewards: filteredArr
+    })
+    console.log(filteredArr.length);
+
+  },
+
+  componentDidMount: function(){
+    $('.tag').on('click', this.handleClick);
+  },
+
   render: function(){
+    console.log(this.state.filterOn);
+    if (this.state.filterOn === false) {
+      return this.renderTags();
+    }
+
+  },
+
+  renderTags: function() {
     var tagItem = this.props.tags.map(function(tag){
       return (
-        React.createElement("li", {className: "tag"}, 
+        React.createElement("li", {className: "tag", onClick: this.handleClick}, 
           tag
         )
       )
@@ -230,19 +270,28 @@ var Main = React.createClass({displayName: "Main",
     })
   },
 
+  handleTagClick: function(data) {
+    var rewards = data.rewards;
+    console.log('work???');
+    this.setState({
+      rewards: rewards
+    });
+  },
+
   componentDidMount: function(){
     console.log('hello');
     this.loadRewards();
   },
 
   render: function() {
+    // user1.name = "Juno"
     console.log(user1)
     return (
       React.createElement("div", {className: "main"}, 
         React.createElement("div", {className: "banner"}, 
           React.createElement("p", null, "See rewards happening now.")
         ), 
-        React.createElement(TagList, {tags: this.state.tags}), 
+        React.createElement(TagList, {tags: this.state.tags, onTagClick: this.handleTagClick}), 
         React.createElement(RewardList, {rewards: this.state.rewards}), 
         React.createElement("div", {className: "content"}
         )
