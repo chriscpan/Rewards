@@ -1,11 +1,14 @@
 var Main = React.createClass({
   getInitialState: function() {
-    return {data: []}
+    return {
+      rewards: [],
+      tags: ['filter', 'all', 'new', 'redeemed', 'completed', 'scheduled']
+    }
   },
 
   loadRewards: function(){
     this.setState({
-      data: rewards
+      rewards: rewards
     })
   },
 
@@ -18,7 +21,11 @@ var Main = React.createClass({
     console.log(user1)
     return (
       <div className="main">
-        <RewardList data={this.state.data} />
+        <div className="banner">
+          <p>See rewards happening now.</p>
+        </div>
+        <TagList tags={this.state.tags} />
+        <RewardList rewards={this.state.rewards} />
         <div className="content">
         </div>
       </div>

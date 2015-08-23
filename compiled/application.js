@@ -149,7 +149,7 @@ var Reward = React.createClass({displayName: "Reward",
     return (
       React.createElement("div", {className: "reward"}, 
         React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("li", null, this.props.user), 
+          React.createElement("li", null, this.props.user['name']), 
           React.createElement("li", null, this.props.experience), 
           React.createElement("li", null, this.props.status), 
           React.createElement("li", null, this.props.date)
@@ -162,7 +162,7 @@ var Reward = React.createClass({displayName: "Reward",
 var RewardList = React.createClass({displayName: "RewardList",
   render: function() {
     console.log('hi');
-    var rewardItem = this.props.data.map(function(reward){
+    var rewardItem = this.props.rewards.map(function(reward){
       return (
         React.createElement(Reward, {
           user: reward.user, 
@@ -182,18 +182,44 @@ var RewardList = React.createClass({displayName: "RewardList",
   }
 })
 
-// var Tag = React.createClass({
-//jgajgkl;jakl;jdsafaafasfds
+// var Tag = React.creatClass({
+//   render: function() {
+//     return(
+//       <div
+//     )
+//   }
 // })
+
+var TagList = React.createClass({displayName: "TagList",
+  render: function(){
+    var tagItem = this.props.tags.map(function(tag){
+      return (
+        React.createElement("li", null, 
+          tag
+        )
+      )
+    })
+    return (
+      React.createElement("div", {className: "tag-box"}, 
+        React.createElement("ul", null, 
+          tagItem
+        )
+      )
+    )
+  }
+})
 
 var Main = React.createClass({displayName: "Main",
   getInitialState: function() {
-    return {data: []}
+    return {
+      rewards: [],
+      tags: ['filter', 'all', 'new', 'redeemed', 'completed', 'scheduled']
+    }
   },
 
   loadRewards: function(){
     this.setState({
-      data: rewards
+      rewards: rewards
     })
   },
 
@@ -206,7 +232,11 @@ var Main = React.createClass({displayName: "Main",
     console.log(user1)
     return (
       React.createElement("div", {className: "main"}, 
-        React.createElement(RewardList, {data: this.state.data}), 
+        React.createElement("div", {className: "banner"}, 
+          React.createElement("p", null, "See rewards happening now.")
+        ), 
+        React.createElement(TagList, {tags: this.state.tags}), 
+        React.createElement(RewardList, {rewards: this.state.rewards}), 
         React.createElement("div", {className: "content"}
         )
       )

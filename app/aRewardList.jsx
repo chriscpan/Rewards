@@ -1,7 +1,7 @@
 var RewardList = React.createClass({
   render: function() {
     console.log('hi');
-    var rewardItem = this.props.data.map(function(reward){
+    var rewardItem = this.props.rewards.map(function(reward){
       return (
         <Reward
           user = {reward.user}
