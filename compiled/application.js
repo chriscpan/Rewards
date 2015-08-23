@@ -149,10 +149,10 @@ var Reward = React.createClass({displayName: "Reward",
     return (
       React.createElement("div", {className: "reward"}, 
         React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("li", null, this.props.user['name']), 
-          React.createElement("li", null, this.props.experience), 
-          React.createElement("li", null, this.props.status), 
-          React.createElement("li", null, this.props.date)
+          React.createElement("li", null, "Username: ", this.props.user['name']), 
+          React.createElement("li", null, "Reward: ", this.props.experience), 
+          React.createElement("li", null, "Status: ", this.props.status), 
+          React.createElement("li", null, "Date: ", this.props.date)
         )
       )
     )
@@ -194,14 +194,14 @@ var TagList = React.createClass({displayName: "TagList",
   render: function(){
     var tagItem = this.props.tags.map(function(tag){
       return (
-        React.createElement("li", null, 
+        React.createElement("li", {className: "tag"}, 
           tag
         )
       )
     })
     return (
       React.createElement("div", {className: "tag-box"}, 
-        React.createElement("ul", null, 
+        React.createElement("ul", {className: "tag-list"}, 
           tagItem
         )
       )

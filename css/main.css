@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+}
+
+.main {
+  font-family: Lato, Helvetica;
+  transform: translateY(-32px);
+}
+.banner {
+  background-image: url("../img/banner.png");
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  width: 100%;
+  min-width: 1000px;
+}
+
+.banner p {
+  text-align: center;
+  line-height: 200px;
+  color: white;
+  font-weight: 400;
+  font-size: 32px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.group {
+  content: "";
+  float: left;
+  display: block;
+}
+
+.tag-box {
+  height: 80px;
+  width: 100%;
+}
+
+/*.tag {
+  float: left;
+}*/
+
+.tag-list {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  min-width: 1000px;
+  list-style: none;
+  display: flex;
+  text-align: center;
+  -webkit-flex-flow: row wrap;
+  justify-content: center;
+  color: blue;
+}
+
+.tag:last-child {
+  border-right: none;
+}
+
+.tag {
+  border-right: 1px solid grey;
+  /*border-bottom: 1px solid grey;*/
+  background: white;
+  padding: 0px 20px 0px 20px;
+  min-width: 125px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.tag:hover{
+  color: blue;
+}
+
+.rewardList {
+  text-align: center;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.rewardDescript {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+}

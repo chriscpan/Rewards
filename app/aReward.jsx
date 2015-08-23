@@ -3,10 +3,10 @@ var Reward = React.createClass({
     return (
       <div className="reward">
         <ul className="rewardDescript">
-          <li>{this.props.user['name']}</li>
-          <li>{this.props.experience}</li>
-          <li>{this.props.status}</li>
-          <li>{this.props.date}</li>
+          <li>Username: {this.props.user['name']}</li>
+          <li>Reward: {this.props.experience}</li>
+          <li>Status: {this.props.status}</li>
+          <li>Date: {this.props.date}</li>
         </ul>
       </div>
     )
