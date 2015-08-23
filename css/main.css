@@ -39,15 +39,11 @@ ul {
   width: 100%;
 }
 
-/*.tag {
-  float: left;
-}*/
-
 .tag-list {
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #ddd;
   width: 100%;
   min-width: 1000px;
   list-style: none;
@@ -55,7 +51,7 @@ ul {
   text-align: center;
   -webkit-flex-flow: row wrap;
   justify-content: center;
-  color: blue;
+  color: rgb(85, 172, 238);
 }
 
 .tag:last-child {
@@ -63,8 +59,7 @@ ul {
 }
 
 .tag {
-  border-right: 1px solid grey;
-  /*border-bottom: 1px solid grey;*/
+  border-right: 1px solid #ddd;
   background: white;
   padding: 0px 20px 0px 20px;
   min-width: 125px;
@@ -75,7 +70,7 @@ ul {
 }
 
 .tag:hover{
-  color: blue;
+  border-bottom: 5px solid rgb(85, 172, 238);
 }
 
 .rewardList {
@@ -87,4 +82,20 @@ ul {
 .rewardDescript {
   border-bottom: 1px solid #ccc;
   padding-bottom: 15px;
+  height: 35px;
+}
+
+.edit {
+  width: 20%;
+  float: left;
+}
+
+.stat-left {
+  width: 40%;
+  float: left;
+}
+
+.stat-right {
+  width: 40%;
+  float: right;
 }

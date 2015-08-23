@@ -149,10 +149,17 @@ var Reward = React.createClass({displayName: "Reward",
     return (
       React.createElement("div", {className: "reward"}, 
         React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("li", null, "Username: ", this.props.user['name']), 
-          React.createElement("li", null, "Reward: ", this.props.experience), 
-          React.createElement("li", null, "Status: ", this.props.status), 
-          React.createElement("li", null, "Date: ", this.props.date)
+          React.createElement("div", {className: "edit"}, 
+            "Edit"
+          ), 
+          React.createElement("div", {className: "stat-left"}, 
+            React.createElement("li", null, "Username: ", this.props.user['name']), 
+            React.createElement("li", null, "Reward: ", this.props.experience)
+          ), 
+          React.createElement("div", {className: "stat-right"}, 
+            React.createElement("li", null, "Status: ", this.props.status), 
+            React.createElement("li", null, "Date: ", this.props.date)
+          )
         )
       )
     )
