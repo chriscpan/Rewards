@@ -104,3 +104,34 @@ ul {
 .active {
   border-bottom: 5px solid rgb(85, 172, 238);
 }
+
+.tagSearch input {
+  height: 80px;
+  width: 68%;
+  outline: none;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: left;
+  border: none;
+}
+
+.filterExit {
+  float: right;
+  font-size: 50px;
+  width: 10%;
+  line-height: 80px;
+  color: #aaa;
+  height: 80px;
+}
+
+.filterExit:hover {
+  cursor: pointer;
+}
+
+.tagSearch {
+  height: 82px;
+  border-bottom: 1px solid #ddd;
+}

@@ -168,7 +168,6 @@ var Reward = React.createClass({displayName: "Reward",
 
 var RewardList = React.createClass({displayName: "RewardList",
   render: function() {
-    console.log('hi');
     var rewardItem = this.props.rewards.map(function(reward){
       return (
         React.createElement(Reward, {
@@ -180,7 +179,6 @@ var RewardList = React.createClass({displayName: "RewardList",
         )
       )
     })
-    console.log('hellos');
     return (
       React.createElement("div", {className: "rewardList"}, 
         rewardItem
@@ -206,42 +204,65 @@ var TagList = React.createClass({displayName: "TagList",
 
   handleClick: function(e) {
     var target = $(e.currentTarget);
+    var text = target.text();
+    if (text === 'filter') {
+      this.setState({
+        filterOn: true
+      })
+      var prevTag = $('.active').text()
+      this.getRewards(prevTag);
+    } else {
+      this.getRewards(text)
+    }
     $('.active').removeClass('active');
     target.addClass('active');
-    var text = target.text();
+  },
+
+  getRewards: function(text) {
     var filteredArr = [];
     rewards.forEach(function(reward){
       if (text === 'all') {
         filteredArr = rewards;
         return;
       }
+      if (text === 'filter') {
+        this.setState({
+          filterOn: true
+        });
+      }
       if (reward.status === text) {
         filteredArr.push(reward)
       }
-    })
+    }.bind(this))
     this.props.onTagClick({
       rewards: filteredArr
     })
-    console.log(filteredArr.length);
-
   },
 
-  componentDidMount: function(){
-    $('.tag').on('click', this.handleClick);
+  handleClose: function(){
+    this.props.onTagClick({
+      rewards: rewards
+    });
+    // $('.tag').on('click', this.handleClick);
+    this.setState({
+      filterOn: false
+    });
   },
 
   render: function(){
-    console.log(this.state.filterOn);
     if (this.state.filterOn === false) {
       return this.renderTags();
+    } else {
+      return this.renderSearch();
     }
 
   },
 
   renderTags: function() {
+    var that = this;
     var tagItem = this.props.tags.map(function(tag){
       return (
-        React.createElement("li", {className: "tag", onClick: this.handleClick}, 
+        React.createElement("li", {className: "tag", onClick: that.handleClick}, 
           tag
         )
       )
@@ -252,6 +273,18 @@ var TagList = React.createClass({displayName: "TagList",
           tagItem
         )
       )
+    )
+  },
+
+  renderSearch: function() {
+    return(
+        React.createElement("form", {className: "tagSearch"}, 
+          React.createElement("input", {type: "text", placeholder: "What rewards do you want to search for?"}, 
+            React.createElement("div", {className: "filterExit", onClick: this.handleClose}, 
+              "X"
+            )
+          )
+        )
     )
   }
 })
@@ -272,20 +305,17 @@ var Main = React.createClass({displayName: "Main",
 
   handleTagClick: function(data) {
     var rewards = data.rewards;
-    console.log('work???');
     this.setState({
       rewards: rewards
     });
   },
 
   componentDidMount: function(){
-    console.log('hello');
     this.loadRewards();
   },
 
   render: function() {
     // user1.name = "Juno"
-    console.log(user1)
     return (
       React.createElement("div", {className: "main"}, 
         React.createElement("div", {className: "banner"}, 

@@ -1,6 +1,5 @@
 var RewardList = React.createClass({
   render: function() {
-    console.log('hi');
     var rewardItem = this.props.rewards.map(function(reward){
       return (
         <Reward
@@ -12,7 +11,6 @@ var RewardList = React.createClass({
         </Reward>
       )
     })
-    console.log('hellos');
     return (
       <div className="rewardList">
         {rewardItem}

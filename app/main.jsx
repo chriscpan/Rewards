@@ -14,20 +14,17 @@ var Main = React.createClass({
 
   handleTagClick: function(data) {
     var rewards = data.rewards;
-    console.log('work???');
     this.setState({
       rewards: rewards
     });
   },
 
   componentDidMount: function(){
-    console.log('hello');
     this.loadRewards();
   },
 
   render: function() {
     // user1.name = "Juno"
-    console.log(user1)
     return (
       <div className="main">
         <div className="banner">
