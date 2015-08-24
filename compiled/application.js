@@ -243,10 +243,23 @@ var TagList = React.createClass({displayName: "TagList",
     this.props.onTagClick({
       rewards: rewards
     });
-    // $('.tag').on('click', this.handleClick);
     this.setState({
       filterOn: false
     });
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var text = React.findDOMNode(this.refs.search).value.trim();
+    var filteredArr = [];
+    rewards.forEach(function(reward){
+      if (reward.experience.indexOf(text) >= 0 || reward.user.name.indexOf(text) >= 0 || reward.date.indexOf(text) >= 0) {
+        filteredArr.push(reward);
+      }
+    })
+    this.props.onTagSearch({
+      rewards: filteredArr
+    })
   },
 
   render: function(){
@@ -278,8 +291,8 @@ var TagList = React.createClass({displayName: "TagList",
 
   renderSearch: function() {
     return(
-        React.createElement("form", {className: "tagSearch"}, 
-          React.createElement("input", {type: "text", placeholder: "What rewards do you want to search for?"}, 
+        React.createElement("form", {className: "tagSearch", onSubmit: this.handleSubmit}, 
+          React.createElement("input", {type: "text", placeholder: "What rewards do you want to search for?", ref: "search"}, 
             React.createElement("div", {className: "filterExit", onClick: this.handleClose}, 
               "X"
             )
@@ -310,6 +323,13 @@ var Main = React.createClass({displayName: "Main",
     });
   },
 
+  handleTagSearch: function(data) {
+    var rewards = data.rewards;
+    this.setState({
+      rewards: rewards
+    })
+  },
+
   componentDidMount: function(){
     this.loadRewards();
   },
@@ -321,7 +341,10 @@ var Main = React.createClass({displayName: "Main",
         React.createElement("div", {className: "banner"}, 
           React.createElement("p", null, "See rewards happening now.")
         ), 
-        React.createElement(TagList, {tags: this.state.tags, onTagClick: this.handleTagClick}), 
+        React.createElement(TagList, {
+          tags: this.state.tags, 
+          onTagClick: this.handleTagClick, 
+          onTagSearch: this.handleTagSearch}), 
         React.createElement(RewardList, {rewards: this.state.rewards}), 
         React.createElement("div", {className: "content"}
         )

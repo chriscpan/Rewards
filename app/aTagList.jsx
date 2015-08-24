@@ -46,10 +46,23 @@ var TagList = React.createClass({
     this.props.onTagClick({
       rewards: rewards
     });
-    // $('.tag').on('click', this.handleClick);
     this.setState({
       filterOn: false
     });
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var text = React.findDOMNode(this.refs.search).value.trim();
+    var filteredArr = [];
+    rewards.forEach(function(reward){
+      if (reward.experience.indexOf(text) >= 0 || reward.user.name.indexOf(text) >= 0 || reward.date.indexOf(text) >= 0) {
+        filteredArr.push(reward);
+      }
+    })
+    this.props.onTagSearch({
+      rewards: filteredArr
+    })
   },
 
   render: function(){
@@ -81,8 +94,8 @@ var TagList = React.createClass({
 
   renderSearch: function() {
     return(
-        <form className="tagSearch">
-          <input type="text" placeholder="What rewards do you want to search for?">
+        <form className="tagSearch" onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="What rewards do you want to search for?" ref="search">
             <div className="filterExit" onClick={this.handleClose}>
               X
             </div>
