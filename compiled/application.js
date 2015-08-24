@@ -145,11 +145,74 @@ var rewards = [
 ];
 
 var Reward = React.createClass({displayName: "Reward",
+  getInitialState: function() {
+    return{
+      editOn: false
+    };
+  },
+
+  handleEdit:function(e) {
+    this.setState({
+      editOn: true
+    })
+  },
+
+  finishEdit: function() {
+    this.setState({
+      editOn: false
+    })
+  },
+
+  handleChangeName: function(event) {
+    // this.props.user['name'] = event.target.value;
+    this.props.onRewardEdit({
+      type: 'name',
+      value: event.target.value,
+      id: this.props.id
+    })
+  },
+
+  handleChangeExp: function(event) {
+    // this.props.experience = event.target.value;
+    this.props.onRewardEdit({
+      type: 'exp',
+      value: event.target.value,
+      id: this.props.id
+    })
+  },
+
+  handleChangeStat: function(event) {
+    // this.props.status = event.target.value;
+    this.props.onRewardEdit({
+      type: 'stat',
+      value: event.target.value,
+      id: this.props.id
+    })
+  },
+
+  handleChangeDate: function(event) {
+    // this.props.date = event.target.value;
+    this.props.onRewardEdit({
+      type: 'date',
+      value: event.target.value,
+      id: this.props.id
+    })
+  },
+
   render: function() {
+    if (this.state.editOn === false) {
+      return this.renderReward();
+    } else {
+      return this.renderEdit();
+    }
+
+  },
+
+  renderReward: function() {
     return (
       React.createElement("div", {className: "reward"}, 
         React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("div", {className: "edit"}, 
+          React.createElement("div", {className: "edit", onClick: this.handleEdit}, 
             "Edit"
           ), 
           React.createElement("div", {className: "stat-left"}, 
@@ -163,18 +226,49 @@ var Reward = React.createClass({displayName: "Reward",
         )
       )
     )
+  },
+
+  renderEdit: function() {
+    return(
+      React.createElement("form", {className: "reward"}, 
+        React.createElement("ul", {className: "rewardDescript"}, 
+          React.createElement("div", {className: "edit", onClick: this.finishEdit}, 
+            "Done Editing"
+          ), 
+          React.createElement("div", {className: "stat-left"}, 
+            React.createElement("li", null, 
+              "Username: ", React.createElement("input", {type: "text", defaultValue: this.props.user['name'], onChange: this.handleChangeName})
+            ), 
+            React.createElement("li", null, 
+              "Reward: ", React.createElement("input", {type: "text", defaultValue: this.props.experience, onChange: this.handleChangeExp})
+            )
+          ), 
+          React.createElement("div", {className: "stat-right"}, 
+            React.createElement("li", null, 
+              "Status: ", React.createElement("input", {type: "text", defaultValue: this.props.status, onChange: this.handleChangeStat})
+            ), 
+            React.createElement("li", null, 
+              "Reward: ", React.createElement("input", {type: "text", defaultValue: this.props.date, onChange: this.handleChangeDate})
+            )
+          )
+        )
+      )
+    )
   }
 })
 
 var RewardList = React.createClass({displayName: "RewardList",
   render: function() {
+    var that = this;
     var rewardItem = this.props.rewards.map(function(reward){
       return (
         React.createElement(Reward, {
+          id: reward.id, 
           user: reward.user, 
           experience: reward.experience, 
           date: reward.date, 
-          status: reward.status
+          status: reward.status, 
+          onRewardEdit: that.props.onRewardEdit
           }
         )
       )
@@ -198,7 +292,7 @@ var RewardList = React.createClass({displayName: "RewardList",
 var TagList = React.createClass({displayName: "TagList",
   getInitialState: function() {
     return {
-      filterOn: false
+      filterOn: false,
     }
   },
 
@@ -253,13 +347,17 @@ var TagList = React.createClass({displayName: "TagList",
     var text = React.findDOMNode(this.refs.search).value.trim();
     var filteredArr = [];
     rewards.forEach(function(reward){
-      if (reward.experience.indexOf(text) >= 0 || reward.user.name.indexOf(text) >= 0 || reward.date.indexOf(text) >= 0) {
+      if (reward.experience.toLowerCase().indexOf(text) >= 0 || reward.user.name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
         filteredArr.push(reward);
       }
     })
     this.props.onTagSearch({
       rewards: filteredArr
     })
+  },
+
+  componentDidMount: function() {
+
   },
 
   render: function(){
@@ -330,6 +428,30 @@ var Main = React.createClass({displayName: "Main",
     })
   },
 
+  handleRewardEdit: function(data) {
+    console.log('main edit!!!!');
+    var type = data.type;
+    var id = data.id;
+    var val = data.value;
+
+    rewards.forEach(function(reward){
+      if(reward.id === id) {
+        console.log(reward);
+        if (type === 'name') {
+          reward.user['name'] = val;
+        } else if (type === 'exp') {
+          reawrd.experience = val;
+        } else if (type === 'stat') {
+          reward.status = val;
+        } else {
+          reward.date = val;
+        }
+        return;
+      }
+    })
+    console.log('hello???')
+  },
+
   componentDidMount: function(){
     this.loadRewards();
   },
@@ -345,7 +467,7 @@ var Main = React.createClass({displayName: "Main",
           tags: this.state.tags, 
           onTagClick: this.handleTagClick, 
           onTagSearch: this.handleTagSearch}), 
-        React.createElement(RewardList, {rewards: this.state.rewards}), 
+        React.createElement(RewardList, {rewards: this.state.rewards, onRewardEdit: this.handleRewardEdit}), 
         React.createElement("div", {className: "content"}
         )
       )

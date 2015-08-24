@@ -1,7 +1,7 @@
 var TagList = React.createClass({
   getInitialState: function() {
     return {
-      filterOn: false
+      filterOn: false,
     }
   },
 
@@ -56,13 +56,17 @@ var TagList = React.createClass({
     var text = React.findDOMNode(this.refs.search).value.trim();
     var filteredArr = [];
     rewards.forEach(function(reward){
-      if (reward.experience.indexOf(text) >= 0 || reward.user.name.indexOf(text) >= 0 || reward.date.indexOf(text) >= 0) {
+      if (reward.experience.toLowerCase().indexOf(text) >= 0 || reward.user.name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
         filteredArr.push(reward);
       }
     })
     this.props.onTagSearch({
       rewards: filteredArr
     })
+  },
+
+  componentDidMount: function() {
+
   },
 
   render: function(){

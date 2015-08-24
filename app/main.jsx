@@ -26,6 +26,30 @@ var Main = React.createClass({
     })
   },
 
+  handleRewardEdit: function(data) {
+    console.log('main edit!!!!');
+    var type = data.type;
+    var id = data.id;
+    var val = data.value;
+
+    rewards.forEach(function(reward){
+      if(reward.id === id) {
+        console.log(reward);
+        if (type === 'name') {
+          reward.user['name'] = val;
+        } else if (type === 'exp') {
+          reawrd.experience = val;
+        } else if (type === 'stat') {
+          reward.status = val;
+        } else {
+          reward.date = val;
+        }
+        return;
+      }
+    })
+    console.log('hello???')
+  },
+
   componentDidMount: function(){
     this.loadRewards();
   },
@@ -41,7 +65,7 @@ var Main = React.createClass({
           tags={this.state.tags}
           onTagClick={this.handleTagClick}
           onTagSearch={this.handleTagSearch} />
-        <RewardList rewards={this.state.rewards} />
+        <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
         <div className="content">
         </div>
       </div>
