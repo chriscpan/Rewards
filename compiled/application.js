@@ -293,6 +293,7 @@ var TagList = React.createClass({displayName: "TagList",
   getInitialState: function() {
     return {
       filterOn: false,
+      start: true
     }
   },
 
@@ -357,6 +358,10 @@ var TagList = React.createClass({displayName: "TagList",
   },
 
   componentDidMount: function() {
+    if (this.state.start) {
+      $(".tag:contains('all')").addClass('active');
+      this.state.start = false;
+    }
 
   },
 
@@ -440,7 +445,7 @@ var Main = React.createClass({displayName: "Main",
         if (type === 'name') {
           reward.user['name'] = val;
         } else if (type === 'exp') {
-          reawrd.experience = val;
+          reward.experience = val;
         } else if (type === 'stat') {
           reward.status = val;
         } else {
@@ -448,6 +453,9 @@ var Main = React.createClass({displayName: "Main",
         }
         return;
       }
+    })
+    this.setState({
+      rewards: rewards
     })
     console.log('hello???')
   },

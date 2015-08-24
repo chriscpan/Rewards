@@ -38,7 +38,7 @@ var Main = React.createClass({
         if (type === 'name') {
           reward.user['name'] = val;
         } else if (type === 'exp') {
-          reawrd.experience = val;
+          reward.experience = val;
         } else if (type === 'stat') {
           reward.status = val;
         } else {
@@ -46,6 +46,9 @@ var Main = React.createClass({
         }
         return;
       }
+    })
+    this.setState({
+      rewards: rewards
     })
     console.log('hello???')
   },

@@ -2,6 +2,7 @@ var TagList = React.createClass({
   getInitialState: function() {
     return {
       filterOn: false,
+      start: true
     }
   },
 
@@ -66,6 +67,10 @@ var TagList = React.createClass({
   },
 
   componentDidMount: function() {
+    if (this.state.start) {
+      $(".tag:contains('all')").addClass('active');
+      this.state.start = false;
+    }
 
   },
 
