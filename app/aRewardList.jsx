@@ -4,6 +4,7 @@ var RewardList = React.createClass({
     var rewardItem = this.props.rewards.map(function(reward){
       return (
         <Reward
+          key = {reward.id}
           id = {reward.id}
           user = {reward.user}
           experience = {reward.experience}

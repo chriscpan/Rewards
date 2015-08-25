@@ -263,6 +263,7 @@ var RewardList = React.createClass({displayName: "RewardList",
     var rewardItem = this.props.rewards.map(function(reward){
       return (
         React.createElement(Reward, {
+          key: reward.id, 
           id: reward.id, 
           user: reward.user, 
           experience: reward.experience, 
@@ -281,19 +282,10 @@ var RewardList = React.createClass({displayName: "RewardList",
   }
 })
 
-// var Tag = React.creatClass({
-//   render: function() {
-//     return(
-//       <div
-//     )
-//   }
-// })
-
-var TagList = React.createClass({displayName: "TagList",
+var Tag = React.createClass({displayName: "Tag",
   getInitialState: function() {
     return {
-      filterOn: false,
-      start: true
+      filterOn: false
     }
   },
 
@@ -301,10 +293,8 @@ var TagList = React.createClass({displayName: "TagList",
     var target = $(e.currentTarget);
     var text = target.text();
     if (text === 'filter') {
-      this.setState({
-        filterOn: true
-      })
       var prevTag = $('.active').text()
+      this.props.onSearchSwap(prevTag);
       this.getRewards(prevTag);
     } else {
       this.getRewards(text)
@@ -320,11 +310,6 @@ var TagList = React.createClass({displayName: "TagList",
         filteredArr = rewards;
         return;
       }
-      if (text === 'filter') {
-        this.setState({
-          filterOn: true
-        });
-      }
       if (reward.status === text) {
         filteredArr.push(reward)
       }
@@ -334,12 +319,37 @@ var TagList = React.createClass({displayName: "TagList",
     })
   },
 
+  render: function() {
+    return (
+      React.createElement("li", {className: "tag", onClick: this.handleClick}, 
+          this.props.tag
+      )
+    )
+  },
+
+})
+
+var TagList = React.createClass({displayName: "TagList",
+  getInitialState: function() {
+    return {
+      start: true,
+      filterOn: false
+    }
+  },
+
+  handleSearchSwap: function() {
+    console.log('hello!!!')
+    this.setState({
+      filterOn: true
+    })
+  },
+
   handleClose: function(){
-    this.props.onTagClick({
-      rewards: rewards
-    });
     this.setState({
       filterOn: false
+    });
+    this.props.onTagClick({
+      rewards: rewards
     });
   },
 
@@ -365,22 +375,27 @@ var TagList = React.createClass({displayName: "TagList",
 
   },
 
-  render: function(){
+  render: function() {
     if (this.state.filterOn === false) {
       return this.renderTags();
     } else {
       return this.renderSearch();
     }
-
   },
 
-  renderTags: function() {
+  renderTags: function(){
     var that = this;
     var tagItem = this.props.tags.map(function(tag){
       return (
-        React.createElement("li", {className: "tag", onClick: that.handleClick}, 
-          tag
-        )
+        React.createElement(Tag, {
+          key: tag.id, 
+          id: tag.id, 
+          tag: tag.tag, 
+          onTagSearch: that.props.onTagSearch, 
+          onTagClick: that.props.onTagClick, 
+          onSearchSwap: that.handleSearchSwap
+         }
+       )
       )
     })
     return (
@@ -405,11 +420,50 @@ var TagList = React.createClass({displayName: "TagList",
   }
 })
 
+var DefaultRoute = ReactRouter.DefaultRoute;
+var HistoryLocation = ReactRouter.HistoryLocation;
+
+var Router = ReactRouter;
+// var Route = Router.Route;
+// var {Route, RouteHandler, Link} = Router;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler
+var Link = Router.Link;
+
 var Main = React.createClass({displayName: "Main",
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function() {
     return {
       rewards: [],
-      tags: ['filter', 'all', 'new', 'redeemed', 'completed', 'scheduled']
+      tags: [
+        {
+          id: 1,
+          tag: 'filter'
+        },
+        {
+          id: 2,
+          tag: 'all'
+        },
+        {
+          id: 3,
+          tag: 'new'
+        },
+        {
+          id: 4,
+          tag: 'redeemed'
+        },
+        {
+          id: 5,
+          tag: 'completed'
+        },
+        {
+          id: 6,
+          tag: 'scheduled'
+        }
+      ]
     }
   },
 
@@ -482,6 +536,64 @@ var Main = React.createClass({displayName: "Main",
     )
   },
 
+  // render: function() {
+  //   return (
+  //     <div className="main">
+  //       <div className="banner">
+  //         <p>See rewards happening now.</p>
+  //       </div>
+  //       <Link to="all"
+  //         tags={this.state.tags}
+  //         onTagClick={this.handleTagClick}
+  //         onTagSearch={this.handleTagSearch}> </Link>
+  //       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
+  //       <div className="content">
+  //       </div>
+  //     </div>
+  //   )
+  // },
+
 })
 
-React.render(React.createElement(Main, null), document.getElementById('main'))
+// React.render(<Main />, document.getElementById('main'))
+
+
+// routes = {
+  // <Route handler={Main} name="rewards" path="/">
+//     <Route handler={all} name="all" path="/all"></Route>
+//     <Route handler={redeemed} name="redeemed" path="/redeemed"></Route>
+//     <Route handler={scheudled} name="scheudled" path="/scheudled"></Route>
+//     <Route handler={new} name="new" path="/new"></Route>
+//     <Route handler={completed} name="completed" path="/completed"></Route>
+  // </Route>
+// }
+//
+// Router.run(routes, function(Handler){
+//   React.render(<Handler/>, document.getElementById('main'))
+// })
+
+
+// Create the parent App component
+var App = React.createClass({displayName: "App",
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+  render: function() {
+    return (
+      React.createElement("div", null, this.context.router.getCurrentPath())
+    );
+  }
+});
+
+// Create a Route component that passes
+// through to our App component
+var routes = (
+  React.createElement(Route, {handler: Main}, 
+    React.createElement(Route, {name: "tag", path: ":tag", handler: TagList})
+  )
+);
+
+// Render the element
+Router.run(routes, Router.HistoryLocation, function (Handler) {
+  React.render(React.createElement(Handler, null), document.getElementById('main'));
+});

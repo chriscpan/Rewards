@@ -1,8 +1,47 @@
+var DefaultRoute = ReactRouter.DefaultRoute;
+var HistoryLocation = ReactRouter.HistoryLocation;
+
+var Router = ReactRouter;
+// var Route = Router.Route;
+// var {Route, RouteHandler, Link} = Router;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler
+var Link = Router.Link;
+
 var Main = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function() {
     return {
       rewards: [],
-      tags: ['filter', 'all', 'new', 'redeemed', 'completed', 'scheduled']
+      tags: [
+        {
+          id: 1,
+          tag: 'filter'
+        },
+        {
+          id: 2,
+          tag: 'all'
+        },
+        {
+          id: 3,
+          tag: 'new'
+        },
+        {
+          id: 4,
+          tag: 'redeemed'
+        },
+        {
+          id: 5,
+          tag: 'completed'
+        },
+        {
+          id: 6,
+          tag: 'scheduled'
+        }
+      ]
     }
   },
 
@@ -75,6 +114,23 @@ var Main = React.createClass({
     )
   },
 
+  // render: function() {
+  //   return (
+  //     <div className="main">
+  //       <div className="banner">
+  //         <p>See rewards happening now.</p>
+  //       </div>
+  //       <Link to="all"
+  //         tags={this.state.tags}
+  //         onTagClick={this.handleTagClick}
+  //         onTagSearch={this.handleTagSearch}> </Link>
+  //       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
+  //       <div className="content">
+  //       </div>
+  //     </div>
+  //   )
+  // },
+
 })
 
-React.render(<Main />, document.getElementById('main'))
+// React.render(<Main />, document.getElementById('main'))

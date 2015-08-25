@@ -14,13 +14,6 @@ gulp.task("scripts", function() {
     .pipe(gulp.dest('compiled'));
 });
 
-// gulp.task("data", function() {
-//   gulp.src(['app/*.js'])
-//     .pipe(plumber())
-//     .pipe(cncat('application.js'))
-//     .pipe(gulp.dest('compiled'));
-// });
-
 gulp.task('watch', function() {
   gulp.watch(['app/*.jsx'], ['scripts']);
   gulp.watch(['app/*.js'], ['data']);

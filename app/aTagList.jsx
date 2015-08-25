@@ -1,54 +1,24 @@
 var TagList = React.createClass({
   getInitialState: function() {
     return {
-      filterOn: false,
-      start: true
+      start: true,
+      filterOn: false
     }
   },
 
-  handleClick: function(e) {
-    var target = $(e.currentTarget);
-    var text = target.text();
-    if (text === 'filter') {
-      this.setState({
-        filterOn: true
-      })
-      var prevTag = $('.active').text()
-      this.getRewards(prevTag);
-    } else {
-      this.getRewards(text)
-    }
-    $('.active').removeClass('active');
-    target.addClass('active');
-  },
-
-  getRewards: function(text) {
-    var filteredArr = [];
-    rewards.forEach(function(reward){
-      if (text === 'all') {
-        filteredArr = rewards;
-        return;
-      }
-      if (text === 'filter') {
-        this.setState({
-          filterOn: true
-        });
-      }
-      if (reward.status === text) {
-        filteredArr.push(reward)
-      }
-    }.bind(this))
-    this.props.onTagClick({
-      rewards: filteredArr
+  handleSearchSwap: function() {
+    console.log('hello!!!')
+    this.setState({
+      filterOn: true
     })
   },
 
   handleClose: function(){
-    this.props.onTagClick({
-      rewards: rewards
-    });
     this.setState({
       filterOn: false
+    });
+    this.props.onTagClick({
+      rewards: rewards
     });
   },
 
@@ -74,22 +44,27 @@ var TagList = React.createClass({
 
   },
 
-  render: function(){
+  render: function() {
     if (this.state.filterOn === false) {
       return this.renderTags();
     } else {
       return this.renderSearch();
     }
-
   },
 
-  renderTags: function() {
+  renderTags: function(){
     var that = this;
     var tagItem = this.props.tags.map(function(tag){
       return (
-        <li className="tag" onClick={that.handleClick}>
-          {tag}
-        </li>
+        <Tag
+          key = {tag.id}
+          id = {tag.id}
+          tag = {tag.tag}
+          onTagSearch = {that.props.onTagSearch}
+          onTagClick = {that.props.onTagClick}
+          onSearchSwap = {that.handleSearchSwap}
+         >
+       </Tag>
       )
     })
     return (
