@@ -3,7 +3,6 @@ var Reward = React.createClass({
 
     return{
       editOn: false,
-      // name: name
     };
   },
 
@@ -20,7 +19,6 @@ var Reward = React.createClass({
   },
 
   handleChangeName: function(event) {
-    // this.props.user['name'] = event.target.value;
     this.props.onRewardEdit({
       type: 'name',
       value: event.target.value,
@@ -29,7 +27,6 @@ var Reward = React.createClass({
   },
 
   handleChangeExp: function(event) {
-    // this.props.experience = event.target.value;
     this.props.onRewardEdit({
       type: 'exp',
       value: event.target.value,
@@ -38,7 +35,6 @@ var Reward = React.createClass({
   },
 
   handleChangeStat: function(event) {
-    // this.props.status = event.target.value;
     this.props.onRewardEdit({
       type: 'stat',
       value: event.target.value,
@@ -47,7 +43,6 @@ var Reward = React.createClass({
   },
 
   handleChangeDate: function(event) {
-    // this.props.date = event.target.value;
     this.props.onRewardEdit({
       type: 'date',
       value: event.target.value,

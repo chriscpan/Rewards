@@ -3,7 +3,6 @@ var react = require('gulp-react');
 var plumber = require('gulp-plumber');
 var cncat = require('gulp-concat');
 var babel = require('gulp-babel');
-var browserify = require('gulp-browserify');
 var reactify = require('reactify');
 
 gulp.task("scripts", function() {

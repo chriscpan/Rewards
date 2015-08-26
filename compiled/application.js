@@ -134,7 +134,6 @@ var Reward = React.createClass({ displayName: "Reward",
     };
   },
 
-  // name: name
   handleEdit: function handleEdit(e) {
     this.setState({
       editOn: true
@@ -148,7 +147,6 @@ var Reward = React.createClass({ displayName: "Reward",
   },
 
   handleChangeName: function handleChangeName(event) {
-    // this.props.user['name'] = event.target.value;
     this.props.onRewardEdit({
       type: 'name',
       value: event.target.value,
@@ -157,7 +155,6 @@ var Reward = React.createClass({ displayName: "Reward",
   },
 
   handleChangeExp: function handleChangeExp(event) {
-    // this.props.experience = event.target.value;
     this.props.onRewardEdit({
       type: 'exp',
       value: event.target.value,
@@ -166,7 +163,6 @@ var Reward = React.createClass({ displayName: "Reward",
   },
 
   handleChangeStat: function handleChangeStat(event) {
-    // this.props.status = event.target.value;
     this.props.onRewardEdit({
       type: 'stat',
       value: event.target.value,
@@ -175,7 +171,6 @@ var Reward = React.createClass({ displayName: "Reward",
   },
 
   handleChangeDate: function handleChangeDate(event) {
-    // this.props.date = event.target.value;
     this.props.onRewardEdit({
       type: 'date',
       value: event.target.value,
@@ -233,9 +228,9 @@ var RewardList = React.createClass({ displayName: "RewardList",
 'use strict';
 
 var Tag = React.createClass({ displayName: "Tag",
-  // contextTypes: {
-  //   router: React.PropTypes.func.isRequired
-  // },
+  contextTypes: {
+    router: React.PropTypes.func.isRequired
+  },
   getInitialState: function getInitialState() {
     return {
       filterOn: false
@@ -273,12 +268,7 @@ var Tag = React.createClass({ displayName: "Tag",
   },
 
   render: function render() {
-    //  var { this.props } = this.context.router.getCurrentParams();
-    // var tagId = curr.tagObj
-    // console.log(this.context.router.getCurrentParams());
     // var tagId = this.context.router.getCurrentParams().tag;
-    // tagObj = (this.context.router.getCurrentParams()).tagObj;
-    // console.log(tagObj);
     return React.createElement(Link, { to: "tag", params: this.props }, React.createElement("li", { className: "tag", onClick: this.handleClick }, this.props.tag));
   }
 
@@ -347,6 +337,8 @@ var TagList = React.createClass({ displayName: "TagList",
 
   renderTags: function renderTags() {
     var that = this;
+    // var tagId = this.context.router.getCurrentParams().tag;
+
     var tagItem = this.props.tags.map(function (tag) {
       return React.createElement(Tag, {
         key: tag.id,
@@ -370,8 +362,6 @@ var DefaultRoute = ReactRouter.DefaultRoute;
 var HistoryLocation = ReactRouter.HistoryLocation;
 
 var Router = ReactRouter;
-// var Route = Router.Route;
-// var {Route, RouteHandler, Link} = Router;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
@@ -464,30 +454,10 @@ var Main = React.createClass({ displayName: "Main",
   }
 
 });
-// Create a Route component that passes
-// through to our App component
 "use strict";
 
 var routes = React.createElement(Route, { path: "/", handler: Main }, React.createElement(Route, { name: "tag", path: ":tag", handler: Tag }));
 
-// function fetchData(routes, params) {
-//   var data = {};
-//   return Promise.all(routes
-//     .filter(route => route.handler.fetchData)
-//     .map(route => {
-//       return route.handler.fetchData(params).then(d => {data[route.name] = d;});
-//     })
-//   ).then(() => data);
-// }
-//
-// Router.run(routes, function (Handler, state) {
-//   loadingEvents.emit('loadStart');
-//
-//   fetchData(state.routes, state.params).then((data) => {
-//     loadingEvents.emit('loadEnd');
-//     React.render(<Handler/>, document.getElementById('main'));
-//   });
-// });
 Router.run(routes, function (Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('main'));
 });

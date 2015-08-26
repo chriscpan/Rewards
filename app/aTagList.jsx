@@ -60,6 +60,8 @@ var TagList = React.createClass({
 
   renderTags: function(){
     var that = this;
+    // var tagId = this.context.router.getCurrentParams().tag;
+
     var tagItem = this.props.tags.map(function(tag){
       return (
         <Tag

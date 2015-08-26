@@ -2,8 +2,6 @@ var DefaultRoute = ReactRouter.DefaultRoute;
 var HistoryLocation = ReactRouter.HistoryLocation;
 
 var Router = ReactRouter;
-// var Route = Router.Route;
-// var {Route, RouteHandler, Link} = Router;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
