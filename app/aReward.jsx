@@ -1,7 +1,9 @@
 var Reward = React.createClass({
   getInitialState: function() {
+
     return{
-      editOn: false
+      editOn: false,
+      // name: name
     };
   },
 
@@ -63,6 +65,12 @@ var Reward = React.createClass({
   },
 
   renderReward: function() {
+    var name;
+    if (typeof this.props.user['name'] === 'undefined') {
+      name = this.props.user;
+    } else {
+      name = this.props.user['name']
+    }
     return (
       <div className="reward">
         <ul className="rewardDescript">
@@ -70,7 +78,7 @@ var Reward = React.createClass({
             Edit
           </div>
           <div className="stat-left">
-            <li>Username: {this.props.user['name']}</li>
+            <li>Username: {name}</li>
             <li>Reward: {this.props.experience}</li>
           </div>
           <div className="stat-right">
@@ -83,6 +91,12 @@ var Reward = React.createClass({
   },
 
   renderEdit: function() {
+    var name;
+    if (typeof this.props.user['name'] === 'undefined') {
+      name = this.props.user;
+    } else {
+      name = this.props.user['name']
+    }
     return(
       <form className="reward">
         <ul className="rewardDescript">
@@ -91,7 +105,7 @@ var Reward = React.createClass({
           </div>
           <div className="stat-left">
             <li>
-              Username: <input type="text" defaultValue={this.props.user['name']} onChange={this.handleChangeName}/>
+              Username: <input type="text" defaultValue={name} onChange={this.handleChangeName}/>
             </li>
             <li>
               Reward: <input type="text" defaultValue={this.props.experience} onChange={this.handleChangeExp}/>

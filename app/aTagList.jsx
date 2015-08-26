@@ -2,10 +2,10 @@ var TagList = React.createClass({
   getInitialState: function() {
     return {
       start: true,
-      filterOn: false
+      filterOn: false,
+      loading: false
     }
   },
-
   handleSearchSwap: function() {
     console.log('hello!!!')
     this.setState({
@@ -27,7 +27,13 @@ var TagList = React.createClass({
     var text = React.findDOMNode(this.refs.search).value.trim();
     var filteredArr = [];
     rewards.forEach(function(reward){
-      if (reward.experience.toLowerCase().indexOf(text) >= 0 || reward.user.name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
+      var name;
+      if (typeof reward.user['name'] === 'undefined') {
+        name = reward.user;
+      } else {
+        name = reward.user['name']
+      }
+      if (reward.experience.toLowerCase().indexOf(text) >= 0 || name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
         filteredArr.push(reward);
       }
     })
@@ -37,11 +43,11 @@ var TagList = React.createClass({
   },
 
   componentDidMount: function() {
+    var timer;
     if (this.state.start) {
       $(".tag:contains('all')").addClass('active');
       this.state.start = false;
     }
-
   },
 
   render: function() {

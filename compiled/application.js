@@ -1,350 +1,297 @@
+'use strict';
+
 var user1 = { id: 1, name: 'Joe Smith' };
 var user2 = { id: 1, name: 'Sue Mae' };
 
-var rewards = [
-  {
-    id: 1,
-    user: user1,
-    experience: 'Trip to Hawaii',
-    date: '10/23/2014',
-    status: 'new'
-  },
-  {
-    id: 2,
-    user: user1,
-    experience: 'The Bond Experience',
-    date: '2/23/2015',
-    status: 'redeemed'
-  },
-  {
-    id: 3,
-    user: user2,
-    experience: 'Cruise around Alaska',
-    date: '4/17/2014',
-    status: 'completed'
-  },
-  {
-    id: 4,
-    user: user2,
-    experience: 'Bladesmithing',
-    date: '8/20/2015',
-    status: 'scheduled'
-  },
-  {
-    id: 5,
-    user: user2,
-    experience: 'Yerba Mate Tasting in Napa',
-    date: '7/23/2015',
-    status: 'completed'
-  },
-  {
-    id: 6,
-    user: user2,
-    experience: 'Super Bowl Tickets',
-    date: '1/2/2014',
-    status: 'redeemed'
-  },
-  {
-    id: 7,
-    user: user2,
-    experience: 'Warriors Tickets',
-    date: '1/2/2014',
-    status: 'redeemed'
-  },
-  {
-    id: 8,
-    user: user2,
-    experience: 'Drive Bugatti Veyron',
-    date: '1/2/2014',
-    status: 'redeemed'
-  },
-  {
-    id: 9,
-    user: user1,
-    experience: 'Kite Surfing Lessons',
-    date: '1/2/2014',
-    status: 'redeemed'
-  },
-  {
-    id: 10,
-    user: user1,
-    experience: 'Something cool',
-    date: '11/11/2011',
-    status: 'redeemed'
-  },
-  {
-    id: 11,
-    user: user2,
-    experience: 'Drive Lamborghini',
-    date: '6/20/2013',
-    status: 'redeemed'
-  },
-  {
-    id: 12,
-    user: user2,
-    experience: 'World Food Tour',
-    date: '1/1/2010',
-    status: 'redeemed'
-  },
-  {
-    id: 13,
-    user: user2,
-    experience: 'Sharks Tickets',
-    date: '1/2/2014',
-    status: 'scheduled'
-  },
-  {
-    id: 14,
-    user: user2,
-    experience: 'Electric Daisy Carnival',
-    date: '1/2/2014',
-    status: 'redeemed'
-  },
-  {
-    id: 15,
-    user: user1,
-    experience: 'Olympics',
-    date: '2/2/2013',
-    status: 'new'
-  },
-  {
-    id: 16,
-    user: user2,
-    experience: 'Great Barrier Reef Snorkeling',
-    date: '1/2/2014',
-    status: 'new'
-  },
-  {
-    id: 17,
-    user: user2,
-    experience: 'Wine Tasting',
-    date: '10/17/2014',
-    status: 'completed'
-  },
-  {
-    id: 18,
-    user: user1,
-    experience: 'Biergarten',
-    date: '1/2/2014',
-    status: 'completed'
-  },
-  {
-    id: 19,
-    user: user2,
-    experience: 'Trip to Europe',
-    date: '11/2/2014',
-    status: 'new'
-  },
-  {
-    id: 20,
-    user: user1,
-    experience: 'Fishing Trip',
-    date: '1/23/2015',
-    status: 'redeemed'
-  }
-];
+var rewards = [{
+  id: 1,
+  user: user1,
+  experience: 'Trip to Hawaii',
+  date: '10/23/2014',
+  status: 'new'
+}, {
+  id: 2,
+  user: user1,
+  experience: 'The Bond Experience',
+  date: '2/23/2015',
+  status: 'redeemed'
+}, {
+  id: 3,
+  user: user2,
+  experience: 'Cruise around Alaska',
+  date: '4/17/2014',
+  status: 'completed'
+}, {
+  id: 4,
+  user: user2,
+  experience: 'Bladesmithing',
+  date: '8/20/2015',
+  status: 'scheduled'
+}, {
+  id: 5,
+  user: user2,
+  experience: 'Yerba Mate Tasting in Napa',
+  date: '7/23/2015',
+  status: 'completed'
+}, {
+  id: 6,
+  user: user2,
+  experience: 'Super Bowl Tickets',
+  date: '1/2/2014',
+  status: 'redeemed'
+}, {
+  id: 7,
+  user: user2,
+  experience: 'Warriors Tickets',
+  date: '1/2/2014',
+  status: 'redeemed'
+}, {
+  id: 8,
+  user: user2,
+  experience: 'Drive Bugatti Veyron',
+  date: '1/2/2014',
+  status: 'redeemed'
+}, {
+  id: 9,
+  user: user1,
+  experience: 'Kite Surfing Lessons',
+  date: '1/2/2014',
+  status: 'redeemed'
+}, {
+  id: 10,
+  user: user1,
+  experience: 'Something cool',
+  date: '11/11/2011',
+  status: 'redeemed'
+}, {
+  id: 11,
+  user: user2,
+  experience: 'Drive Lamborghini',
+  date: '6/20/2013',
+  status: 'redeemed'
+}, {
+  id: 12,
+  user: user2,
+  experience: 'World Food Tour',
+  date: '1/1/2010',
+  status: 'redeemed'
+}, {
+  id: 13,
+  user: user2,
+  experience: 'Sharks Tickets',
+  date: '1/2/2014',
+  status: 'scheduled'
+}, {
+  id: 14,
+  user: user2,
+  experience: 'Electric Daisy Carnival',
+  date: '1/2/2014',
+  status: 'redeemed'
+}, {
+  id: 15,
+  user: user1,
+  experience: 'Olympics',
+  date: '2/2/2013',
+  status: 'new'
+}, {
+  id: 16,
+  user: user2,
+  experience: 'Great Barrier Reef Snorkeling',
+  date: '1/2/2014',
+  status: 'new'
+}, {
+  id: 17,
+  user: user2,
+  experience: 'Wine Tasting',
+  date: '10/17/2014',
+  status: 'completed'
+}, {
+  id: 18,
+  user: user1,
+  experience: 'Biergarten',
+  date: '1/2/2014',
+  status: 'completed'
+}, {
+  id: 19,
+  user: user2,
+  experience: 'Trip to Europe',
+  date: '11/2/2014',
+  status: 'new'
+}, {
+  id: 20,
+  user: user1,
+  experience: 'Fishing Trip',
+  date: '1/23/2015',
+  status: 'redeemed'
+}];
+'use strict';
 
-var Reward = React.createClass({displayName: "Reward",
-  getInitialState: function() {
-    return{
+var Reward = React.createClass({ displayName: "Reward",
+  getInitialState: function getInitialState() {
+
+    return {
       editOn: false
     };
   },
 
-  handleEdit:function(e) {
+  // name: name
+  handleEdit: function handleEdit(e) {
     this.setState({
       editOn: true
-    })
+    });
   },
 
-  finishEdit: function() {
+  finishEdit: function finishEdit() {
     this.setState({
       editOn: false
-    })
+    });
   },
 
-  handleChangeName: function(event) {
+  handleChangeName: function handleChangeName(event) {
     // this.props.user['name'] = event.target.value;
     this.props.onRewardEdit({
       type: 'name',
       value: event.target.value,
       id: this.props.id
-    })
+    });
   },
 
-  handleChangeExp: function(event) {
+  handleChangeExp: function handleChangeExp(event) {
     // this.props.experience = event.target.value;
     this.props.onRewardEdit({
       type: 'exp',
       value: event.target.value,
       id: this.props.id
-    })
+    });
   },
 
-  handleChangeStat: function(event) {
+  handleChangeStat: function handleChangeStat(event) {
     // this.props.status = event.target.value;
     this.props.onRewardEdit({
       type: 'stat',
       value: event.target.value,
       id: this.props.id
-    })
+    });
   },
 
-  handleChangeDate: function(event) {
+  handleChangeDate: function handleChangeDate(event) {
     // this.props.date = event.target.value;
     this.props.onRewardEdit({
       type: 'date',
       value: event.target.value,
       id: this.props.id
-    })
+    });
   },
 
-  render: function() {
+  render: function render() {
     if (this.state.editOn === false) {
       return this.renderReward();
     } else {
       return this.renderEdit();
     }
-
   },
 
-  renderReward: function() {
-    return (
-      React.createElement("div", {className: "reward"}, 
-        React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("div", {className: "edit", onClick: this.handleEdit}, 
-            "Edit"
-          ), 
-          React.createElement("div", {className: "stat-left"}, 
-            React.createElement("li", null, "Username: ", this.props.user['name']), 
-            React.createElement("li", null, "Reward: ", this.props.experience)
-          ), 
-          React.createElement("div", {className: "stat-right"}, 
-            React.createElement("li", null, "Status: ", this.props.status), 
-            React.createElement("li", null, "Date: ", this.props.date)
-          )
-        )
-      )
-    )
+  renderReward: function renderReward() {
+    var name;
+    if (typeof this.props.user['name'] === 'undefined') {
+      name = this.props.user;
+    } else {
+      name = this.props.user['name'];
+    }
+    return React.createElement("div", { className: "reward" }, React.createElement("ul", { className: "rewardDescript" }, React.createElement("div", { className: "edit", onClick: this.handleEdit }, "Edit"), React.createElement("div", { className: "stat-left" }, React.createElement("li", null, "Username: ", name), React.createElement("li", null, "Reward: ", this.props.experience)), React.createElement("div", { className: "stat-right" }, React.createElement("li", null, "Status: ", this.props.status), React.createElement("li", null, "Date: ", this.props.date))));
   },
 
-  renderEdit: function() {
-    return(
-      React.createElement("form", {className: "reward"}, 
-        React.createElement("ul", {className: "rewardDescript"}, 
-          React.createElement("div", {className: "edit", onClick: this.finishEdit}, 
-            "Done Editing"
-          ), 
-          React.createElement("div", {className: "stat-left"}, 
-            React.createElement("li", null, 
-              "Username: ", React.createElement("input", {type: "text", defaultValue: this.props.user['name'], onChange: this.handleChangeName})
-            ), 
-            React.createElement("li", null, 
-              "Reward: ", React.createElement("input", {type: "text", defaultValue: this.props.experience, onChange: this.handleChangeExp})
-            )
-          ), 
-          React.createElement("div", {className: "stat-right"}, 
-            React.createElement("li", null, 
-              "Status: ", React.createElement("input", {type: "text", defaultValue: this.props.status, onChange: this.handleChangeStat})
-            ), 
-            React.createElement("li", null, 
-              "Reward: ", React.createElement("input", {type: "text", defaultValue: this.props.date, onChange: this.handleChangeDate})
-            )
-          )
-        )
-      )
-    )
+  renderEdit: function renderEdit() {
+    var name;
+    if (typeof this.props.user['name'] === 'undefined') {
+      name = this.props.user;
+    } else {
+      name = this.props.user['name'];
+    }
+    return React.createElement("form", { className: "reward" }, React.createElement("ul", { className: "rewardDescript" }, React.createElement("div", { className: "edit", onClick: this.finishEdit }, "Done Editing"), React.createElement("div", { className: "stat-left" }, React.createElement("li", null, "Username: ", React.createElement("input", { type: "text", defaultValue: name, onChange: this.handleChangeName })), React.createElement("li", null, "Reward: ", React.createElement("input", { type: "text", defaultValue: this.props.experience, onChange: this.handleChangeExp }))), React.createElement("div", { className: "stat-right" }, React.createElement("li", null, "Status: ", React.createElement("input", { type: "text", defaultValue: this.props.status, onChange: this.handleChangeStat })), React.createElement("li", null, "Reward: ", React.createElement("input", { type: "text", defaultValue: this.props.date, onChange: this.handleChangeDate })))));
   }
-})
+});
+"use strict";
 
-var RewardList = React.createClass({displayName: "RewardList",
-  render: function() {
+var RewardList = React.createClass({ displayName: "RewardList",
+  render: function render() {
     var that = this;
-    var rewardItem = this.props.rewards.map(function(reward){
-      return (
-        React.createElement(Reward, {
-          key: reward.id, 
-          id: reward.id, 
-          user: reward.user, 
-          experience: reward.experience, 
-          date: reward.date, 
-          status: reward.status, 
-          onRewardEdit: that.props.onRewardEdit
-          }
-        )
-      )
-    })
-    return (
-      React.createElement("div", {className: "rewardList"}, 
-        rewardItem
-      )
-    )
+    var rewardItem = this.props.rewards.map(function (reward) {
+      return React.createElement(Reward, {
+        key: reward.id,
+        id: reward.id,
+        user: reward.user,
+        experience: reward.experience,
+        date: reward.date,
+        status: reward.status,
+        onRewardEdit: that.props.onRewardEdit
+      });
+    });
+    return React.createElement("div", { className: "rewardList" }, rewardItem);
   }
-})
+});
+'use strict';
 
-var Tag = React.createClass({displayName: "Tag",
-  getInitialState: function() {
+var Tag = React.createClass({ displayName: "Tag",
+  getInitialState: function getInitialState() {
     return {
       filterOn: false
-    }
+    };
   },
 
-  handleClick: function(e) {
+  handleClick: function handleClick(e) {
     var target = $(e.currentTarget);
     var text = target.text();
     if (text === 'filter') {
-      var prevTag = $('.active').text()
+      var prevTag = $('.active').text();
       this.props.onSearchSwap(prevTag);
       this.getRewards(prevTag);
     } else {
-      this.getRewards(text)
+      this.getRewards(text);
     }
     $('.active').removeClass('active');
     target.addClass('active');
   },
 
-  getRewards: function(text) {
+  getRewards: function getRewards(text) {
     var filteredArr = [];
-    rewards.forEach(function(reward){
+    rewards.forEach((function (reward) {
       if (text === 'all') {
         filteredArr = rewards;
         return;
       }
       if (reward.status === text) {
-        filteredArr.push(reward)
+        filteredArr.push(reward);
       }
-    }.bind(this))
+    }).bind(this));
     this.props.onTagClick({
       rewards: filteredArr
-    })
+    });
   },
 
-  render: function() {
-    return (
-      React.createElement("li", {className: "tag", onClick: this.handleClick}, 
-          this.props.tag
-      )
-    )
-  },
+  render: function render() {
+    return React.createElement(Link, { to: "tag", params: this.props }, React.createElement("li", { className: "tag", onClick: this.handleClick }, this.props.tag));
+  }
 
-})
+});
+'use strict';
 
-var TagList = React.createClass({displayName: "TagList",
-  getInitialState: function() {
+var TagList = React.createClass({ displayName: "TagList",
+  getInitialState: function getInitialState() {
     return {
       start: true,
-      filterOn: false
-    }
+      filterOn: false,
+      loading: false
+    };
   },
-
-  handleSearchSwap: function() {
-    console.log('hello!!!')
+  handleSearchSwap: function handleSearchSwap() {
+    console.log('hello!!!');
     this.setState({
       filterOn: true
-    })
+    });
   },
 
-  handleClose: function(){
+  handleClose: function handleClose() {
     this.setState({
       filterOn: false
     });
@@ -353,29 +300,35 @@ var TagList = React.createClass({displayName: "TagList",
     });
   },
 
-  handleSubmit: function(event) {
+  handleSubmit: function handleSubmit(event) {
     event.preventDefault();
     var text = React.findDOMNode(this.refs.search).value.trim();
     var filteredArr = [];
-    rewards.forEach(function(reward){
-      if (reward.experience.toLowerCase().indexOf(text) >= 0 || reward.user.name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
+    rewards.forEach(function (reward) {
+      var name;
+      if (typeof reward.user['name'] === 'undefined') {
+        name = reward.user;
+      } else {
+        name = reward.user['name'];
+      }
+      if (reward.experience.toLowerCase().indexOf(text) >= 0 || name.toLowerCase().indexOf(text) >= 0 || reward.date.toLowerCase().indexOf(text) >= 0) {
         filteredArr.push(reward);
       }
-    })
+    });
     this.props.onTagSearch({
       rewards: filteredArr
-    })
+    });
   },
 
-  componentDidMount: function() {
+  componentDidMount: function componentDidMount() {
+    var timer;
     if (this.state.start) {
       $(".tag:contains('all')").addClass('active');
       this.state.start = false;
     }
-
   },
 
-  render: function() {
+  render: function render() {
     if (this.state.filterOn === false) {
       return this.renderTags();
     } else {
@@ -383,42 +336,26 @@ var TagList = React.createClass({displayName: "TagList",
     }
   },
 
-  renderTags: function(){
+  renderTags: function renderTags() {
     var that = this;
-    var tagItem = this.props.tags.map(function(tag){
-      return (
-        React.createElement(Tag, {
-          key: tag.id, 
-          id: tag.id, 
-          tag: tag.tag, 
-          onTagSearch: that.props.onTagSearch, 
-          onTagClick: that.props.onTagClick, 
-          onSearchSwap: that.handleSearchSwap
-         }
-       )
-      )
-    })
-    return (
-      React.createElement("div", {className: "tag-box"}, 
-        React.createElement("ul", {className: "tag-list"}, 
-          tagItem
-        )
-      )
-    )
+    var tagItem = this.props.tags.map(function (tag) {
+      return React.createElement(Tag, {
+        key: tag.id,
+        id: tag.id,
+        tag: tag.tag,
+        onTagSearch: that.props.onTagSearch,
+        onTagClick: that.props.onTagClick,
+        onSearchSwap: that.handleSearchSwap
+      });
+    });
+    return React.createElement("div", { className: "tag-box" }, React.createElement("ul", { className: "tag-list" }, tagItem));
   },
 
-  renderSearch: function() {
-    return(
-        React.createElement("form", {className: "tagSearch", onSubmit: this.handleSubmit}, 
-          React.createElement("input", {type: "text", placeholder: "What rewards do you want to search for?", ref: "search"}, 
-            React.createElement("div", {className: "filterExit", onClick: this.handleClose}, 
-              "X"
-            )
-          )
-        )
-    )
+  renderSearch: function renderSearch() {
+    return React.createElement("form", { className: "tagSearch", onSubmit: this.handleSubmit }, React.createElement("input", { type: "text", placeholder: "What rewards do you want to search for?", ref: "search" }, React.createElement("div", { className: "filterExit", onClick: this.handleClose }, "X")));
   }
-})
+});
+'use strict';
 
 var DefaultRoute = ReactRouter.DefaultRoute;
 var HistoryLocation = ReactRouter.HistoryLocation;
@@ -427,77 +364,91 @@ var Router = ReactRouter;
 // var Route = Router.Route;
 // var {Route, RouteHandler, Link} = Router;
 var Route = Router.Route;
-var RouteHandler = Router.RouteHandler
+var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
+var loadingEvents = new EventEmitter();
 
-var Main = React.createClass({displayName: "Main",
+var Main = React.createClass({ displayName: "Main",
   contextTypes: {
     router: React.PropTypes.func
   },
 
-  getInitialState: function() {
+  getInitialState: function getInitialState() {
     return {
       rewards: [],
-      tags: [
-        {
-          id: 1,
-          tag: 'filter'
-        },
-        {
-          id: 2,
-          tag: 'all'
-        },
-        {
-          id: 3,
-          tag: 'new'
-        },
-        {
-          id: 4,
-          tag: 'redeemed'
-        },
-        {
-          id: 5,
-          tag: 'completed'
-        },
-        {
-          id: 6,
-          tag: 'scheduled'
-        }
-      ]
-    }
+      loading: false,
+      tags: [{
+        id: 1,
+        tag: 'filter'
+      }, {
+        id: 2,
+        tag: 'all'
+      }, {
+        id: 3,
+        tag: 'new'
+      }, {
+        id: 4,
+        tag: 'redeemed'
+      }, {
+        id: 5,
+        tag: 'completed'
+      }, {
+        id: 6,
+        tag: 'scheduled'
+      }]
+    };
   },
 
-  loadRewards: function(){
+  loadRewards: function loadRewards() {
     this.setState({
       rewards: rewards
-    })
+    });
   },
 
-  handleTagClick: function(data) {
+  handleTagClick: function handleTagClick(data) {
+    var _this = this;
+
+    var rewards = data.rewards;
+    var timer;
+    loadingEvents.on('loadStart', function () {
+      clearTimeout(timer);
+      // for slow responses, indicate the app is thinking
+      // otherwise its fast enough to just wait for the
+      // data to load
+      timer = setTimeout(function () {
+        _this.setState({
+          loading: true,
+          rewards: rewards
+        });
+      }, 300);
+    });
+    loadingEvents.on('loadEnd', function () {
+      clearTimeout(timer);
+      _this.setState({ loading: false });
+    });
+    this.setState({
+      rewards: rewards
+    });
+  },
+
+  handleTagSearch: function handleTagSearch(data) {
     var rewards = data.rewards;
     this.setState({
       rewards: rewards
     });
   },
 
-  handleTagSearch: function(data) {
-    var rewards = data.rewards;
-    this.setState({
-      rewards: rewards
-    })
-  },
-
-  handleRewardEdit: function(data) {
+  handleRewardEdit: function handleRewardEdit(data) {
     console.log('main edit!!!!');
     var type = data.type;
     var id = data.id;
     var val = data.value;
 
-    rewards.forEach(function(reward){
-      if(reward.id === id) {
+    rewards.forEach(function (reward) {
+      if (reward.id === id) {
         console.log(reward);
         if (type === 'name') {
-          reward.user['name'] = val;
+          reward.user = val;
         } else if (type === 'exp') {
           reward.experience = val;
         } else if (type === 'stat') {
@@ -507,93 +458,97 @@ var Main = React.createClass({displayName: "Main",
         }
         return;
       }
-    })
+    });
     this.setState({
       rewards: rewards
-    })
-    console.log('hello???')
+    });
+    console.log('hello???');
   },
 
-  componentDidMount: function(){
+  componentDidMount: function componentDidMount() {
     this.loadRewards();
   },
 
-  render: function() {
+  render: function render() {
     // user1.name = "Juno"
-    return (
-      React.createElement("div", {className: "main"}, 
-        React.createElement("div", {className: "banner"}, 
-          React.createElement("p", null, "See rewards happening now.")
-        ), 
-        React.createElement(TagList, {
-          tags: this.state.tags, 
-          onTagClick: this.handleTagClick, 
-          onTagSearch: this.handleTagSearch}), 
-        React.createElement(RewardList, {rewards: this.state.rewards, onRewardEdit: this.handleRewardEdit}), 
-        React.createElement("div", {className: "content"}
-        )
-      )
-    )
-  },
+    return React.createElement("div", { className: "main" }, React.createElement("div", { className: "banner" }, React.createElement("p", null, "See rewards happening now.")), React.createElement(TagList, {
+      tags: this.state.tags,
+      onTagClick: this.handleTagClick,
+      onTagSearch: this.handleTagSearch }), React.createElement(RewardList, { rewards: this.state.rewards, onRewardEdit: this.handleRewardEdit }), React.createElement("div", { className: "content" }));
+  }
 
-  // render: function() {
-  //   return (
-  //     <div className="main">
-  //       <div className="banner">
-  //         <p>See rewards happening now.</p>
-  //       </div>
-  //       <Link to="all"
-  //         tags={this.state.tags}
-  //         onTagClick={this.handleTagClick}
-  //         onTagSearch={this.handleTagSearch}> </Link>
-  //       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
-  //       <div className="content">
-  //       </div>
-  //     </div>
-  //   )
-  // },
-
-})
+});
 
 // React.render(<Main />, document.getElementById('main'))
-
+// render: function() {
+//   return (
+//     <div className="main">
+//       <div className="banner">
+//         <p>See rewards happening now.</p>
+//       </div>
+//       <Link to="all"
+//         tags={this.state.tags}
+//         onTagClick={this.handleTagClick}
+//         onTagSearch={this.handleTagSearch}> </Link>
+//       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
+//       <div className="content">
+//       </div>
+//     </div>
+//   )
+// },
 
 // routes = {
-  // <Route handler={Main} name="rewards" path="/">
+// <Route handler={Main} name="rewards" path="/">
 //     <Route handler={all} name="all" path="/all"></Route>
 //     <Route handler={redeemed} name="redeemed" path="/redeemed"></Route>
 //     <Route handler={scheudled} name="scheudled" path="/scheudled"></Route>
 //     <Route handler={new} name="new" path="/new"></Route>
 //     <Route handler={completed} name="completed" path="/completed"></Route>
-  // </Route>
+// </Route>
 // }
 //
 // Router.run(routes, function(Handler){
 //   React.render(<Handler/>, document.getElementById('main'))
 // })
 
-
 // Create the parent App component
-var App = React.createClass({displayName: "App",
+"use strict";
+
+var App = React.createClass({ displayName: "App",
   contextTypes: {
     router: React.PropTypes.func
   },
-  render: function() {
-    return (
-      React.createElement("div", null, this.context.router.getCurrentPath())
-    );
+  render: function render() {
+    return React.createElement("div", null, this.context.router.getCurrentPath());
   }
 });
 
 // Create a Route component that passes
 // through to our App component
-var routes = (
-  React.createElement(Route, {handler: Main}, 
-    React.createElement(Route, {name: "tag", path: ":tag", handler: TagList})
-  )
-);
+var routes = React.createElement(Route, { handler: Main }, React.createElement(Route, { name: "tag", path: ":tag", handler: Tag }));
 
-// Render the element
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-  React.render(React.createElement(Handler, null), document.getElementById('main'));
+function fetchData(routes, params) {
+  var data = {};
+  return Promise.all(routes.filter(function (route) {
+    return route.handler.fetchData;
+  }).map(function (route) {
+    return route.handler.fetchData(params).then(function (d) {
+      data[route.name] = d;
+    });
+  })).then(function () {
+    return data;
+  });
+}
+
+Router.run(routes, function (Handler, state) {
+  loadingEvents.emit('loadStart');
+
+  fetchData(state.routes, state.params).then(function (data) {
+    loadingEvents.emit('loadEnd');
+    React.render(React.createElement(Handler, null), document.getElementById('main'));
+  });
 });
+// Render the element
+// Router.run(routes, function (Handler) {
+//   React.render(<Handler/>, document.getElementById('main'));
+// });

@@ -7,6 +7,8 @@ var Router = ReactRouter;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler
 var Link = Router.Link;
+var loadingEvents = new EventEmitter();
+
 
 var Main = React.createClass({
   contextTypes: {
@@ -16,6 +18,7 @@ var Main = React.createClass({
   getInitialState: function() {
     return {
       rewards: [],
+      loading: false,
       tags: [
         {
           id: 1,
@@ -53,6 +56,23 @@ var Main = React.createClass({
 
   handleTagClick: function(data) {
     var rewards = data.rewards;
+    var timer;
+    loadingEvents.on('loadStart', () => {
+      clearTimeout(timer);
+    // for slow responses, indicate the app is thinking
+    // otherwise its fast enough to just wait for the
+    // data to load
+      timer = setTimeout(() => {
+        this.setState({
+          loading: true,
+          rewards: rewards
+         });
+      }, 300);
+    });
+    loadingEvents.on('loadEnd', () => {
+      clearTimeout(timer);
+      this.setState({ loading: false });
+    });
     this.setState({
       rewards: rewards
     });
@@ -75,7 +95,7 @@ var Main = React.createClass({
       if(reward.id === id) {
         console.log(reward);
         if (type === 'name') {
-          reward.user['name'] = val;
+          reward.user = val;
         } else if (type === 'exp') {
           reward.experience = val;
         } else if (type === 'stat') {
@@ -94,6 +114,9 @@ var Main = React.createClass({
 
   componentDidMount: function(){
     this.loadRewards();
+
+
+
   },
 
   render: function() {

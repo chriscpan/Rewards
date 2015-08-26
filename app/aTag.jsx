@@ -37,9 +37,11 @@ var Tag = React.createClass({
 
   render: function() {
     return (
-      <li className="tag" onClick={this.handleClick}>
+      <Link to="tag" params={this.props}>
+        <li className="tag" onClick={this.handleClick}>
           {this.props.tag}
-      </li>
+        </li>
+      </Link>
     )
   },
 
