@@ -5,10 +5,9 @@ var Router = ReactRouter;
 // var Route = Router.Route;
 // var {Route, RouteHandler, Link} = Router;
 var Route = Router.Route;
-var RouteHandler = Router.RouteHandler
+var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
-var loadingEvents = new EventEmitter();
-
+var DefaultRoute = Router.DefaultRoute;
 
 var Main = React.createClass({
   contextTypes: {
@@ -56,23 +55,6 @@ var Main = React.createClass({
 
   handleTagClick: function(data) {
     var rewards = data.rewards;
-    var timer;
-    loadingEvents.on('loadStart', () => {
-      clearTimeout(timer);
-    // for slow responses, indicate the app is thinking
-    // otherwise its fast enough to just wait for the
-    // data to load
-      timer = setTimeout(() => {
-        this.setState({
-          loading: true,
-          rewards: rewards
-         });
-      }, 300);
-    });
-    loadingEvents.on('loadEnd', () => {
-      clearTimeout(timer);
-      this.setState({ loading: false });
-    });
     this.setState({
       rewards: rewards
     });
@@ -86,14 +68,12 @@ var Main = React.createClass({
   },
 
   handleRewardEdit: function(data) {
-    console.log('main edit!!!!');
     var type = data.type;
     var id = data.id;
     var val = data.value;
 
     rewards.forEach(function(reward){
       if(reward.id === id) {
-        console.log(reward);
         if (type === 'name') {
           reward.user = val;
         } else if (type === 'exp') {
@@ -109,18 +89,13 @@ var Main = React.createClass({
     this.setState({
       rewards: rewards
     })
-    console.log('hello???')
   },
 
   componentDidMount: function(){
     this.loadRewards();
-
-
-
   },
 
   render: function() {
-    // user1.name = "Juno"
     return (
       <div className="main">
         <div className="banner">
@@ -137,23 +112,4 @@ var Main = React.createClass({
     )
   },
 
-  // render: function() {
-  //   return (
-  //     <div className="main">
-  //       <div className="banner">
-  //         <p>See rewards happening now.</p>
-  //       </div>
-  //       <Link to="all"
-  //         tags={this.state.tags}
-  //         onTagClick={this.handleTagClick}
-  //         onTagSearch={this.handleTagSearch}> </Link>
-  //       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
-  //       <div className="content">
-  //       </div>
-  //     </div>
-  //   )
-  // },
-
 })
-
-// React.render(<Main />, document.getElementById('main'))

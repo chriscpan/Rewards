@@ -77,6 +77,14 @@ li {
   cursor: pointer;
 }
 
+.reward {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
 .rewardList {
   text-align: center;
   margin-right: 10%;
@@ -84,8 +92,8 @@ li {
 }
 
 .rewardDescript {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 25px;
   height: 35px;
 }
 
@@ -104,6 +112,9 @@ li {
   float: right;
 }
 
+/*.stat-left li {
+  padding: 10px;
+}*/
 .active {
   border-bottom: 5px solid rgb(85, 172, 238);
 }
@@ -137,4 +148,13 @@ li {
 .tagSearch {
   height: 82px;
   border-bottom: 1px solid #ddd;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(85, 172, 238);
+}
+
+a:visited {
+  color: rgb(85, 172, 238);
 }

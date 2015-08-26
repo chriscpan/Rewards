@@ -233,6 +233,9 @@ var RewardList = React.createClass({ displayName: "RewardList",
 'use strict';
 
 var Tag = React.createClass({ displayName: "Tag",
+  // contextTypes: {
+  //   router: React.PropTypes.func.isRequired
+  // },
   getInitialState: function getInitialState() {
     return {
       filterOn: false
@@ -270,6 +273,12 @@ var Tag = React.createClass({ displayName: "Tag",
   },
 
   render: function render() {
+    //  var { this.props } = this.context.router.getCurrentParams();
+    // var tagId = curr.tagObj
+    // console.log(this.context.router.getCurrentParams());
+    // var tagId = this.context.router.getCurrentParams().tag;
+    // tagObj = (this.context.router.getCurrentParams()).tagObj;
+    // console.log(tagObj);
     return React.createElement(Link, { to: "tag", params: this.props }, React.createElement("li", { className: "tag", onClick: this.handleClick }, this.props.tag));
   }
 
@@ -366,7 +375,7 @@ var Router = ReactRouter;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
-var loadingEvents = new EventEmitter();
+var DefaultRoute = Router.DefaultRoute;
 
 var Main = React.createClass({ displayName: "Main",
   contextTypes: {
@@ -406,26 +415,7 @@ var Main = React.createClass({ displayName: "Main",
   },
 
   handleTagClick: function handleTagClick(data) {
-    var _this = this;
-
     var rewards = data.rewards;
-    var timer;
-    loadingEvents.on('loadStart', function () {
-      clearTimeout(timer);
-      // for slow responses, indicate the app is thinking
-      // otherwise its fast enough to just wait for the
-      // data to load
-      timer = setTimeout(function () {
-        _this.setState({
-          loading: true,
-          rewards: rewards
-        });
-      }, 300);
-    });
-    loadingEvents.on('loadEnd', function () {
-      clearTimeout(timer);
-      _this.setState({ loading: false });
-    });
     this.setState({
       rewards: rewards
     });
@@ -439,14 +429,12 @@ var Main = React.createClass({ displayName: "Main",
   },
 
   handleRewardEdit: function handleRewardEdit(data) {
-    console.log('main edit!!!!');
     var type = data.type;
     var id = data.id;
     var val = data.value;
 
     rewards.forEach(function (reward) {
       if (reward.id === id) {
-        console.log(reward);
         if (type === 'name') {
           reward.user = val;
         } else if (type === 'exp') {
@@ -462,7 +450,6 @@ var Main = React.createClass({ displayName: "Main",
     this.setState({
       rewards: rewards
     });
-    console.log('hello???');
   },
 
   componentDidMount: function componentDidMount() {
@@ -470,7 +457,6 @@ var Main = React.createClass({ displayName: "Main",
   },
 
   render: function render() {
-    // user1.name = "Juno"
     return React.createElement("div", { className: "main" }, React.createElement("div", { className: "banner" }, React.createElement("p", null, "See rewards happening now.")), React.createElement(TagList, {
       tags: this.state.tags,
       onTagClick: this.handleTagClick,
@@ -478,77 +464,30 @@ var Main = React.createClass({ displayName: "Main",
   }
 
 });
-
-// React.render(<Main />, document.getElementById('main'))
-// render: function() {
-//   return (
-//     <div className="main">
-//       <div className="banner">
-//         <p>See rewards happening now.</p>
-//       </div>
-//       <Link to="all"
-//         tags={this.state.tags}
-//         onTagClick={this.handleTagClick}
-//         onTagSearch={this.handleTagSearch}> </Link>
-//       <RewardList rewards={this.state.rewards} onRewardEdit={this.handleRewardEdit}/>
-//       <div className="content">
-//       </div>
-//     </div>
-//   )
-// },
-
-// routes = {
-// <Route handler={Main} name="rewards" path="/">
-//     <Route handler={all} name="all" path="/all"></Route>
-//     <Route handler={redeemed} name="redeemed" path="/redeemed"></Route>
-//     <Route handler={scheudled} name="scheudled" path="/scheudled"></Route>
-//     <Route handler={new} name="new" path="/new"></Route>
-//     <Route handler={completed} name="completed" path="/completed"></Route>
-// </Route>
-// }
-//
-// Router.run(routes, function(Handler){
-//   React.render(<Handler/>, document.getElementById('main'))
-// })
-
-// Create the parent App component
-"use strict";
-
-var App = React.createClass({ displayName: "App",
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-  render: function render() {
-    return React.createElement("div", null, this.context.router.getCurrentPath());
-  }
-});
-
 // Create a Route component that passes
 // through to our App component
-var routes = React.createElement(Route, { handler: Main }, React.createElement(Route, { name: "tag", path: ":tag", handler: Tag }));
+"use strict";
 
-function fetchData(routes, params) {
-  var data = {};
-  return Promise.all(routes.filter(function (route) {
-    return route.handler.fetchData;
-  }).map(function (route) {
-    return route.handler.fetchData(params).then(function (d) {
-      data[route.name] = d;
-    });
-  })).then(function () {
-    return data;
-  });
-}
+var routes = React.createElement(Route, { path: "/", handler: Main }, React.createElement(Route, { name: "tag", path: ":tag", handler: Tag }));
 
-Router.run(routes, function (Handler, state) {
-  loadingEvents.emit('loadStart');
-
-  fetchData(state.routes, state.params).then(function (data) {
-    loadingEvents.emit('loadEnd');
-    React.render(React.createElement(Handler, null), document.getElementById('main'));
-  });
-});
-// Render the element
-// Router.run(routes, function (Handler) {
-//   React.render(<Handler/>, document.getElementById('main'));
+// function fetchData(routes, params) {
+//   var data = {};
+//   return Promise.all(routes
+//     .filter(route => route.handler.fetchData)
+//     .map(route => {
+//       return route.handler.fetchData(params).then(d => {data[route.name] = d;});
+//     })
+//   ).then(() => data);
+// }
+//
+// Router.run(routes, function (Handler, state) {
+//   loadingEvents.emit('loadStart');
+//
+//   fetchData(state.routes, state.params).then((data) => {
+//     loadingEvents.emit('loadEnd');
+//     React.render(<Handler/>, document.getElementById('main'));
+//   });
 // });
+Router.run(routes, function (Handler) {
+  React.render(React.createElement(Handler, null), document.getElementById('main'));
+});

@@ -1,4 +1,7 @@
 var Tag = React.createClass({
+  // contextTypes: {
+  //   router: React.PropTypes.func.isRequired
+  // },
   getInitialState: function() {
     return {
       filterOn: false
@@ -36,8 +39,14 @@ var Tag = React.createClass({
   },
 
   render: function() {
+    //  var { this.props } = this.context.router.getCurrentParams();
+    // var tagId = curr.tagObj
+    // console.log(this.context.router.getCurrentParams());
+    // var tagId = this.context.router.getCurrentParams().tag;
+    // tagObj = (this.context.router.getCurrentParams()).tagObj;
+    // console.log(tagObj);
     return (
-      <Link to="tag" params={this.props}>
+      <Link to="tag" params={ this.props } >
         <li className="tag" onClick={this.handleClick}>
           {this.props.tag}
         </li>
