@@ -367,6 +367,19 @@ var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var DefaultRoute = Router.DefaultRoute;
 
+var setRewardsLocally = function setRewardsLocally(rewards) {
+  localStorage.setItem('rewards', JSON.stringify(rewards));
+  var localRewards = localStorage.getItem('rewards');
+  localRewards = JSON.parse(localRewards);
+  return localRewards;
+};
+
+var loadRewardsLocally = function loadRewardsLocally() {
+  var storedValue = localStorage.getItem('rewards');
+  if (storedValue) {
+    rewards = JSON.parse(storedValue);
+  }
+};
 var Main = React.createClass({ displayName: "Main",
   contextTypes: {
     router: React.PropTypes.func
@@ -399,6 +412,9 @@ var Main = React.createClass({ displayName: "Main",
   },
 
   loadRewards: function loadRewards() {
+    // var localRewards = setRewardsLocally(rewards);
+    // console.log(localRewards)
+    loadRewardsLocally();
     this.setState({
       rewards: rewards
     });
@@ -437,8 +453,11 @@ var Main = React.createClass({ displayName: "Main",
         return;
       }
     });
+
+    var localRewards = setRewardsLocally(rewards);
+
     this.setState({
-      rewards: rewards
+      rewards: localRewards
     });
   },
 
