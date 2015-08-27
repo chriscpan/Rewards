@@ -1,6 +1,5 @@
 var Reward = React.createClass({
   getInitialState: function() {
-
     return{
       editOn: false,
     };
@@ -56,7 +55,6 @@ var Reward = React.createClass({
     } else {
       return this.renderEdit();
     }
-
   },
 
   renderReward: function() {

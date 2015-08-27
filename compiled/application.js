@@ -128,7 +128,6 @@ var rewards = [{
 
 var Reward = React.createClass({ displayName: "Reward",
   getInitialState: function getInitialState() {
-
     return {
       editOn: false
     };
@@ -228,9 +227,6 @@ var RewardList = React.createClass({ displayName: "RewardList",
 'use strict';
 
 var Tag = React.createClass({ displayName: "Tag",
-  contextTypes: {
-    router: React.PropTypes.func.isRequired
-  },
   getInitialState: function getInitialState() {
     return {
       filterOn: false
@@ -268,7 +264,6 @@ var Tag = React.createClass({ displayName: "Tag",
   },
 
   render: function render() {
-    // var tagId = this.context.router.getCurrentParams().tag;
     return React.createElement(Link, { to: "tag", params: this.props }, React.createElement("li", { className: "tag", onClick: this.handleClick }, this.props.tag));
   }
 
@@ -283,8 +278,8 @@ var TagList = React.createClass({ displayName: "TagList",
       loading: false
     };
   },
+
   handleSearchSwap: function handleSearchSwap() {
-    console.log('hello!!!');
     this.setState({
       filterOn: true
     });
@@ -337,8 +332,6 @@ var TagList = React.createClass({ displayName: "TagList",
 
   renderTags: function renderTags() {
     var that = this;
-    // var tagId = this.context.router.getCurrentParams().tag;
-
     var tagItem = this.props.tags.map(function (tag) {
       return React.createElement(Tag, {
         key: tag.id,
@@ -358,14 +351,9 @@ var TagList = React.createClass({ displayName: "TagList",
 });
 'use strict';
 
-var DefaultRoute = ReactRouter.DefaultRoute;
-var HistoryLocation = ReactRouter.HistoryLocation;
-
 var Router = ReactRouter;
 var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
-var DefaultRoute = Router.DefaultRoute;
 
 var setRewardsLocally = function setRewardsLocally(rewards) {
   localStorage.setItem('rewards', JSON.stringify(rewards));

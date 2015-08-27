@@ -1,11 +1,6 @@
-var DefaultRoute = ReactRouter.DefaultRoute;
-var HistoryLocation = ReactRouter.HistoryLocation;
-
 var Router = ReactRouter;
 var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
-var DefaultRoute = Router.DefaultRoute;
 
 
 var setRewardsLocally = function(rewards) {
